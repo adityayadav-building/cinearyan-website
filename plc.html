@@ -69,7 +69,7 @@ body.topbar-hidden nav{top:0}
 .mobile-menu-close svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2}
 
 /* ===== HERO ===== */
-.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 38px + 70px) 2rem 120px;position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,var(--paper) 60%)}
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--nav-h) + 38px + 44px + 60px) 2rem 120px;position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,var(--paper) 60%)}
 .hero-beam{position:absolute;top:-10%;left:50%;width:1px;height:60%;background:none;pointer-events:none}
 .hero-beam-shape{position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:0;border-left:140px solid transparent;border-right:140px solid transparent;border-top:0;pointer-events:none}
 .hero-projector-glow{position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:1100px;height:520px;background:radial-gradient(ellipse at top,rgba(200,30,58,.07) 0%,rgba(200,30,58,0) 65%);pointer-events:none}
@@ -92,10 +92,11 @@ body.topbar-hidden nav{top:0}
 @keyframes scrollDrip{0%{top:-100%}100%{top:100%}}
 
 /* ===== TICKER ===== */
-.ticker{height:50px;background:var(--ink);display:flex;align-items:center;overflow:hidden}
+.ticker{height:44px;background:var(--ink);display:flex;align-items:center;overflow:hidden;position:fixed;top:calc(38px + var(--nav-h));left:0;right:0;z-index:199;transition:top .25s}
+body.topbar-hidden .ticker{top:var(--nav-h)}
 .ticker-inner{display:flex;animation:ticker 30s linear infinite;white-space:nowrap}
-.ticker-item{font-family:var(--head);font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:0 2.25rem}
-.ticker-sep{color:var(--red);font-size:14px;line-height:1}
+.ticker-item{font-family:var(--head);font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:0 2rem}
+.ticker-sep{color:var(--red);font-size:13px;line-height:1}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ===== SHARED SECTION ===== */
@@ -173,6 +174,52 @@ body.topbar-hidden nav{top:0}
 .callout-box{background:var(--paper-dim);border-left:3px solid var(--red);padding:1.1rem 1.25rem;margin-bottom:1.25rem;font-size:14px;color:var(--ink-soft);line-height:1.75}
 .callout-box strong{color:var(--ink);display:block;margin-bottom:.4rem;font-size:14.5px}
 
+/* ===== PRODUCT CATALOG TILE (clickable, links to detail page) ===== */
+.cat-tile{background:#fff;border:1px solid var(--line);position:relative;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);transition:border-color .3s,box-shadow .3s,transform .3s}
+.cat-tile:hover{border-color:var(--line-strong);box-shadow:0 14px 36px rgba(22,22,26,.1);transform:translateY(-3px)}
+.cat-tile-img{aspect-ratio:4/3;background:var(--paper-dim);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.cat-tile-img img{width:100%;height:100%;object-fit:contain;padding:1.75rem;transition:transform .3s}
+.cat-tile:hover .cat-tile-img img{transform:scale(1.05)}
+.cat-tile-img svg{width:90px;height:90px;opacity:.16;stroke:var(--red);fill:none;stroke-width:1}
+.cat-tile-tag{position:absolute;top:1rem;left:1rem;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:5px 10px;border-radius:2px}
+.cat-tile-body{padding:1.75rem;flex:1;display:flex;flex-direction:column}
+.cat-tile-model{font-family:var(--head);font-weight:800;font-size:30px;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);line-height:1}
+.cat-tile-subtitle{font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.01em;color:var(--red);text-transform:uppercase;margin:.5rem 0 .9rem}
+.cat-tile-teaser{font-size:14.5px;color:var(--ink-soft);line-height:1.7;margin-bottom:1.5rem;flex:1}
+.cat-tile-cta{display:flex;align-items:center;gap:.5rem;font-size:14px;font-weight:600;color:var(--ink);padding-top:1.25rem;border-top:1px solid var(--line);transition:color .2s,gap .2s}
+.cat-tile-cta svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s}
+.cat-tile:hover .cat-tile-cta{color:var(--red)}
+.cat-tile:hover .cat-tile-cta svg{transform:translateX(4px)}
+
+/* ===== PRODUCT DETAIL PAGE ===== */
+.pd-back{display:inline-flex;align-items:center;gap:.5rem;font-size:14px;font-weight:600;color:var(--ink-soft);text-decoration:none;margin-bottom:2rem;transition:color .2s}
+.pd-back:hover{color:var(--red)}
+.pd-back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.pd-hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem}
+.pd-img-wrap{background:var(--paper-dim);border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;padding:2.5rem;aspect-ratio:4/3;position:relative;overflow:hidden}
+.pd-img-wrap img{width:100%;height:100%;object-fit:contain}
+.pd-img-wrap svg{width:160px;height:160px;opacity:.14;stroke:var(--red);fill:none;stroke-width:1}
+.pd-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--red);color:#fff;padding:6px 14px;border-radius:2px;margin-bottom:1.25rem}
+.pd-model{font-family:var(--head);font-weight:800;font-size:clamp(40px,5.5vw,64px);letter-spacing:.01em;text-transform:uppercase;color:var(--ink);line-height:1}
+.pd-subtitle{font-family:var(--body);font-weight:600;font-size:16px;color:var(--red);text-transform:uppercase;margin:.6rem 0 1.5rem;letter-spacing:.01em}
+.pd-desc{font-size:17px;color:var(--ink-soft);line-height:1.8;margin-bottom:1.75rem}
+.pd-badge-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.pd-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--paper-dim);border:1px solid var(--line);padding:8px 16px;font-size:13px;font-weight:600;color:var(--ink-soft);border-radius:2px}
+.pd-badge .dot-r{width:6px;height:6px}
+.pd-section{margin-bottom:3.5rem}
+.pd-section-h{font-family:var(--head);font-weight:800;font-size:28px;text-transform:uppercase;letter-spacing:.01em;color:var(--ink);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--red)}
+.pd-spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.pd-spec-item{background:#fff;padding:1.5rem 1.25rem}
+.pd-spec-label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.pd-spec-val{font-size:19px;font-weight:700;color:var(--ink)}
+.pd-construction{display:flex;flex-wrap:wrap;gap:.6rem}
+.pd-construction span{background:var(--paper-dim);border:1px solid var(--line);padding:8px 14px;font-size:13.5px;color:var(--ink-soft);border-radius:2px}
+.pd-callout{background:var(--ink);color:#fff;padding:2rem 2.25rem;border-radius:4px;margin-bottom:1rem}
+.pd-callout-label{font-family:var(--head);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.85rem;font-weight:700}
+.pd-callout p{font-size:15.5px;color:rgba(255,255,255,.85);line-height:1.8;margin-bottom:.6rem}
+.pd-callout p:last-child{margin-bottom:0}
+.pd-related{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+
 /* ===== WHY / BANNER ===== */
 .why-banner{background:var(--ink);padding:4rem 4.5rem;margin-bottom:4.5rem;display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:center;position:relative;overflow:hidden;border-radius:4px}
 .why-banner-h{font-family:var(--head);font-weight:800;font-size:clamp(36px,4.2vw,58px);line-height:.96;letter-spacing:-.01em;text-transform:uppercase;color:#fff;position:relative;z-index:2}
@@ -241,7 +288,7 @@ footer{background:var(--ink);color:#fff}
 .plc-feat span.bar{color:var(--red);font-size:18px;line-height:1;flex-shrink:0}
 
 /* ===== PAGE HEADER (inner pages) ===== */
-.page-header{padding:calc(var(--nav-h) + 38px + 100px) 3rem 5rem;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,var(--paper) 100%)}
+.page-header{padding:calc(var(--nav-h) + 38px + 44px + 80px) 3rem 5rem;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,var(--paper) 100%)}
 .page-header-inner{position:relative;z-index:2;max-width:840px;margin:0 auto}
 .page-eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;color:var(--red);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:.75rem;text-transform:uppercase;font-weight:600}
 .page-eyebrow::before,.page-eyebrow::after{content:'';flex:1;max-width:50px;height:1px;background:var(--red);opacity:.45}
@@ -276,7 +323,7 @@ footer{background:var(--ink);color:#fff}
   .nav-links{display:none}
   .nav-burger{display:flex}
   nav{padding:0 1.25rem}
-  .hero{padding-top:calc(var(--nav-h) + 80px)}
+  .hero{padding-top:calc(var(--nav-h) + 44px + 60px)}
   .section{padding:4rem 1.25rem}
   .section-tight{padding:3rem 1.25rem}
   .about-3col{grid-template-columns:1fr;gap:2.25rem;padding-bottom:3rem;margin-bottom:3rem}
@@ -290,7 +337,7 @@ footer{background:var(--ink);color:#fff}
   .form-row{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr;gap:2.25rem;padding:3.5rem 1.25rem 2.25rem}
   .footer-bottom{flex-direction:column;text-align:center;padding:1.5rem}
-  .page-header{padding:calc(var(--nav-h) + 70px) 1.25rem 3.5rem}
+  .page-header{padding:calc(var(--nav-h) + 44px + 50px) 1.25rem 3.5rem}
   .process-step{grid-template-columns:54px 1fr;padding:1.75rem 1.25rem}
   .process-num{font-size:32px}
   div[style*="grid-template-columns: repeat(3, 1fr)"]{grid-template-columns:1fr!important}
@@ -331,7 +378,26 @@ footer{background:var(--ink);color:#fff}
   <button class="nav-burger" id="navBurger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-</nav><div class="mobile-menu" id="mobileMenu">
+</nav><div class="ticker" id="globalTicker">
+  <div class="ticker-inner">
+    <span class="ticker-item">CA-series Cinema Speakers</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">US-CA3310 ScreenArray</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">US-CA1862 Dual Subwoofer</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">PLC Automation Interface</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">PVR INOX Trusted</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">200+ Screens Equipped</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">Assembled in India</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">Components from USA</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">CA-series Cinema Speakers</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">US-CA3310 ScreenArray</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">US-CA1862 Dual Subwoofer</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">PLC Automation Interface</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">PVR INOX Trusted</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">200+ Screens Equipped</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">Assembled in India</span><span class="ticker-sep">&#9670;</span>
+    <span class="ticker-item">Components from USA</span><span class="ticker-sep">&#9670;</span>
+  </div>
+</div><div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close">
     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
@@ -470,11 +536,11 @@ footer{background:var(--ink);color:#fff}
     </div>
     <div class="footer-col">
       <h5>Products</h5>
-      <a href="products.html">CA-1862 Subwoofer</a>
-      <a href="products.html">CA-1562 Woofer</a>
-      <a href="products.html">CA-65 Driver</a>
-      <a href="products.html">US-CA3310 ScreenArray</a>
-      <a href="products.html">US-CA16 Subwoofer</a>
+      <a href="product-us-ca1860.html">US-CA1860 Subwoofer</a>
+      <a href="product-us-ca1560.html">US-CA1560 Woofer</a>
+      <a href="product-us-ca65.html">US-CA65 Driver</a>
+      <a href="product-us-ca3310.html">US-CA3310 ScreenArray</a>
+      <a href="product-us-ca1862.html">US-CA1862 Subwoofer</a>
     </div>
     <div class="footer-col">
       <h5>Contact</h5>
